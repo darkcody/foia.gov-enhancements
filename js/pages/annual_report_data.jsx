@@ -80,6 +80,7 @@ class AnnualReportDataPage extends Component {
       dataTypes,
       dataTypeOptions,
       selectedDataTypes,
+      fiscalYears,
     } = this.state;
 
     return (
@@ -98,7 +99,9 @@ class AnnualReportDataPage extends Component {
             dataTypeOptions={dataTypeOptions}
             selectedDataTypes={selectedDataTypes}
           />
-          <FoiaReportFormSectionThree />
+          <FoiaReportFormSectionThree
+            fiscalYears={fiscalYears}
+          />
         </form>
       </div>
     );
