@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import FoiaTooltip from './foia_tooltip';
+import { reportActions } from '../actions/report';
 
 
 /**
@@ -9,52 +10,35 @@ import FoiaTooltip from './foia_tooltip';
  * as we break the markup into better components.
  */
 class FoiaReportFormSectionThree extends Component {
-
   constructor(props) {
     super(props);
-    this.state = {
-      // @todo: should this be managed by one of the data stores? Existing store
-      // and actions or new ones needed?
-      selected: {},
-    };
 
     this.handleSelectAll = this.handleSelectAll.bind(this);
     this.handleSelectNone = this.handleSelectNone.bind(this);
-  }
-
-  setFiscalYearValue(fiscalYear, value) {
-    const newValues = { ...this.state.selected };
-    newValues[fiscalYear] = value;
-    this.setState({ selected: newValues });
-  }
-
-  setAllFiscalYearValues(value = true) {
-    const selected = [...this.props.fiscalYears]
-      .reduce(
-        (values, fiscalYear) => Object.assign(values, { [fiscalYear]: value }),
-        {},
-      );
-    this.setState({ selected });
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSelectAll(event) {
-    this.setAllFiscalYearValues(true);
+    reportActions.updateSelectedFiscalYears([...this.props.fiscalYears]);
     event.preventDefault();
   }
 
   handleSelectNone(event) {
-    this.setAllFiscalYearValues(false);
+    reportActions.updateSelectedFiscalYears([]);
     event.preventDefault();
   }
 
   handleChange(event) {
     const target = event.target;
-    const name = target.name;
-    // @todo: set state here?
+    const value = target.value.toString();
+    const selected = target.checked ?
+      [...this.props.selectedFiscalYears].concat([value]) :
+      [...this.props.selectedFiscalYears].filter(year => value !== year);
+    reportActions.updateSelectedFiscalYears(selected);
   }
 
   render() {
-    const { fiscalYears } = this.props;
+    const { fiscalYears, selectedFiscalYears } = this.props;
     return (
       <div>
         <div className="form-group">
@@ -73,7 +57,7 @@ class FoiaReportFormSectionThree extends Component {
                       type="checkbox"
                       name={fiscalYear}
                       value={fiscalYear}
-                      checked={this.state.selected[fiscalYear]}
+                      checked={selectedFiscalYears.includes(fiscalYear)}
                       onChange={this.handleChange}
                     />
                     <label htmlFor={fiscalYear}>{fiscalYear}</label>
@@ -95,11 +79,13 @@ class FoiaReportFormSectionThree extends Component {
 }
 
 FoiaReportFormSectionThree.propTypes = {
-  fiscalYears: PropTypes.object,
+  fiscalYears: PropTypes.array,
+  selectedFiscalYears: PropTypes.array,
 };
 
 FoiaReportFormSectionThree.defaultProps = {
-  fiscalYears: {},
+  fiscalYears: [],
+  selectedFiscalYears: [],
 };
 
 export default FoiaReportFormSectionThree;
