@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import FoiaTooltip from './foia_tooltip';
+import FoiaReportFormCheckboxWidget from './foia_report_form_checkbox_widget';
 import { reportActions } from '../actions/report';
 
 
@@ -52,15 +53,11 @@ class FoiaReportFormSectionThree extends Component {
               <ul className="usa-unstyled-list usa-grid checkbox-list">
                 { fiscalYears.map(fiscalYear => (
                   <li className="usa-width-one-sixth" key={fiscalYear}>
-                    <input
-                      id={fiscalYear}
-                      type="checkbox"
-                      name={fiscalYear}
+                    <FoiaReportFormCheckboxWidget
                       value={fiscalYear}
                       checked={selectedFiscalYears.includes(fiscalYear)}
                       onChange={this.handleChange}
                     />
-                    <label htmlFor={fiscalYear}>{fiscalYear}</label>
                   </li>
                 ))}
               </ul>
