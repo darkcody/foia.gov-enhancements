@@ -1,6 +1,7 @@
 import 'test/setup';
 import React from 'react';
 import { shallow } from 'enzyme';
+import { List } from 'immutable';
 import FoiaReportFormSectionThree from '../../components/foia_report_form_section_three';
 import { reportActions } from '../../actions/report';
 
@@ -8,7 +9,7 @@ describe('Foia Report Form ', () => {
 
   describe('Fiscal Years form component', () => {
     let formElement;
-    const fiscalYearsData = ['2020', '2019', '2018'];
+    const fiscalYearsData = List(['2020', '2019', '2018']);
     const defaultSelectedFiscalYears = ['2019'];
     const mockClickEvent = {
       preventDefault: () => {},
@@ -31,7 +32,7 @@ describe('Foia Report Form ', () => {
 
     it('displays the provided fiscal year options.', () => {
       const rendered = formElement.render();
-      expect(rendered.find('input[type=checkbox]')).to.have.length(fiscalYearsData.length);
+      expect(rendered.find('input[type=checkbox]')).to.have.length(fiscalYearsData.count());
       fiscalYearsData.forEach((fiscalYear) => {
         expect(rendered.find(`input[value='${fiscalYear}']`).length).to.equal(1);
       });

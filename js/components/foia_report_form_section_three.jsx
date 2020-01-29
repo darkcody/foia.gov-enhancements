@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { List } from 'immutable';
 import FoiaTooltip from './foia_tooltip';
 import FoiaReportFormCheckboxWidget from './foia_report_form_checkbox_widget';
 import { reportActions } from '../actions/report';
@@ -76,12 +77,12 @@ class FoiaReportFormSectionThree extends Component {
 }
 
 FoiaReportFormSectionThree.propTypes = {
-  fiscalYears: PropTypes.array,
+  fiscalYears: PropTypes.instanceOf(List),
   selectedFiscalYears: PropTypes.array,
 };
 
 FoiaReportFormSectionThree.defaultProps = {
-  fiscalYears: [],
+  fiscalYears: List(),
   selectedFiscalYears: [],
 };
 
