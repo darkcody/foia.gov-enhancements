@@ -6,7 +6,6 @@ import FoiaReportFormSectionThree from '../../components/foia_report_form_sectio
 import { reportActions } from '../../actions/report';
 
 describe('Foia Report Form ', () => {
-
   describe('Fiscal Years form component', () => {
     let formElement;
     const fiscalYearsData = List(['2020', '2019', '2018']);
@@ -58,6 +57,5 @@ describe('Foia Report Form ', () => {
         .simulate('click', mockClickEvent);
       expect(reportActions.updateSelectedFiscalYears.calledWith(expectedArgument)).to.be.true;
     });
-
   });
 });

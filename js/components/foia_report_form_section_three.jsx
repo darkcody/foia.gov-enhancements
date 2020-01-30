@@ -12,21 +12,20 @@ import { reportActions } from '../actions/report';
  * as we break the markup into better components.
  */
 class FoiaReportFormSectionThree extends Component {
+  static handleSelectNone(event) {
+    reportActions.updateSelectedFiscalYears([]);
+    event.preventDefault();
+  }
+
   constructor(props) {
     super(props);
 
     this.handleSelectAll = this.handleSelectAll.bind(this);
-    this.handleSelectNone = this.handleSelectNone.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleSelectAll(event) {
     reportActions.updateSelectedFiscalYears([...this.props.fiscalYears]);
-    event.preventDefault();
-  }
-
-  handleSelectNone(event) {
-    reportActions.updateSelectedFiscalYears([]);
     event.preventDefault();
   }
 
@@ -65,7 +64,7 @@ class FoiaReportFormSectionThree extends Component {
               <div className="form-group">
                 <ul className="inline-list">
                   <li><a href="#" onClick={this.handleSelectAll}>Select All</a></li>
-                  <li><a href="#" onClick={this.handleSelectNone}>Select None</a></li>
+                  <li><a href="#" onClick={FoiaReportFormSectionThree.handleSelectNone}>Select None</a></li>
                 </ul>
               </div>
             </fieldset>

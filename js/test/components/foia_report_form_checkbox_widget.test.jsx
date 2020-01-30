@@ -1,7 +1,7 @@
 import 'test/setup';
 import React from 'react';
 import { render } from 'enzyme';
-import FoiaReportFormCheckboxWidget from '../../components/foia_report_form_checkbox_widget'
+import FoiaReportFormCheckboxWidget from '../../components/foia_report_form_checkbox_widget';
 
 describe('Foia Report Form Checkbox Widget', () => {
   let checkedElement;
@@ -13,7 +13,7 @@ describe('Foia Report Form Checkbox Widget', () => {
   beforeEach(() => {
     checkedElement = render((
       <FoiaReportFormCheckboxWidget
-        checked={true}
+        checked
         value={checkedOptionValue}
         onChange={onChangeHandler}
       />
@@ -43,7 +43,7 @@ describe('Foia Report Form Checkbox Widget', () => {
     const expectedLabel = 'This is a custom label';
     const elementWithCustomLabel = render((
       <FoiaReportFormCheckboxWidget
-        checked={true}
+        checked
         value={checkedOptionValue}
         onChange={onChangeHandler}
         options={{ label: expectedLabel }}
