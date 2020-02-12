@@ -5,12 +5,11 @@ describe('FOIA Api', function foiaApiTestScenarios() {
   // Increasing (default 2000ms) to account for real-world conditions.
   this.timeout(30000);
 
-  const baseUrl = 'https://uat-api.foia.gov/api';
   let apiResponse;
   let apiResponseData;
 
   const makeRequest = (endpoint, params = {}) => {
-    const api = new JsonApi(baseUrl);
+    const api = new JsonApi();
 
     return api.get(endpoint, { params }).then((response) => {
       apiResponse = response;
